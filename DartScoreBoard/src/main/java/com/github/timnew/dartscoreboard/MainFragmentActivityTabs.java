@@ -3,15 +3,15 @@ package com.github.timnew.dartscoreboard;
 import android.support.v4.app.Fragment;
 
 public enum MainFragmentActivityTabs implements FragmentBuilder {
-    ScoreBoard {
+    SimpleScore {
         @Override
         public Fragment buildFragment() {
-            return new ScoreBoardFragment_();
+            return new SimpleScoreFragment_();
         }
 
         @Override
         public CharSequence getDisplayName() {
-            return "Score Board";
+            return "Simple Score Board";
         }
     };
 

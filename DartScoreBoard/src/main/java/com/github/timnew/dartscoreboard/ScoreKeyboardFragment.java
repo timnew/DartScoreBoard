@@ -6,7 +6,7 @@ import android.widget.Button;
 import com.googlecode.androidannotations.annotations.Click;
 import com.googlecode.androidannotations.annotations.EFragment;
 
-@EFragment(R.layout.score_board)
+@EFragment(R.layout.score_keyboard)
 public class ScoreKeyboardFragment extends Fragment {
 
     @Click({
