@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:stretchColumns="*">
+    <TableRow>
+        <EditText android:layout_span="4"/>
+    </TableRow>
+    <TableRow>
+        <Button android:text="1" android:id="@+id/d1"/>
+        <Button android:text="2" android:id="@+id/d2"/>
+        <Button android:text="3" android:id="@+id/d3"/>
+        <Button android:text="&lt;-" android:id="@+id/back"/>
+    </TableRow>
+    <TableRow>
+        <Button android:text="4" android:id="@+id/d4"/>
+        <Button android:text="5" android:id="@+id/d5"/>
+        <Button android:text="6" android:id="@+id/d6"/>
+        <Button android:text="Bust" android:id="@+id/bust"/>
+    </TableRow>
+    <TableRow>
+        <Button android:text="7" android:id="@+id/d7"/>
+        <Button android:text="8" android:id="@+id/d8"/>
+        <Button android:text="9" android:id="@+id/d9"/>
+        <Button android:text="+" android:id="@+id/plus"/>
+    </TableRow>
+    <TableRow>
+        <Button android:text="x2" android:id="@+id/doubleTimes"/>
+        <Button android:text="0" android:id="@+id/d0"/>
+        <Button android:text="x3" android:id="@+id/tripleTimes"/>
+        <Button android:text="Ok" android:id="@+id/ok"/>
+    </TableRow>
+</TableLayout>

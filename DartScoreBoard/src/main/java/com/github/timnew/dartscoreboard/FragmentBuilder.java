@@ -1,4 +1,4 @@
-package com.github.timnew.dartscoreboard.adapter;
+package com.github.timnew.dartscoreboard;
 
 import android.support.v4.app.Fragment;
 

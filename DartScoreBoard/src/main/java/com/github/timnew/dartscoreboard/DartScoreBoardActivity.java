@@ -4,7 +4,6 @@ package com.github.timnew.dartscoreboard;
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.github.timnew.dartscoreboard.adapter.PagerActionBarAdapter;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
@@ -18,6 +17,9 @@ public class DartScoreBoardActivity
 
     @AfterViews
     void afterViews() {
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+
         configureViewPager();
     }
 

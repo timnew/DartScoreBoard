@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:paddingTop="10dp" android:paddingBottom="10dp"
+                 android:background="#333">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Player"
+                android:id="@+id/player_name"
+                android:layout_gravity="center" android:textSize="24dp"/>
+    </FrameLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical" android:paddingTop="20dp" android:paddingBottom="20dp"
+                  android:divider="#ffffff" android:background="#666666">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Sets: 0     Legs: 0"
+                android:id="@+id/sets_and_legs"
+                android:textSize="32dp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="501"
+                android:id="@+id/total_score"
+                android:textColor="#33FF33" android:textSize="48dp" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp" android:layout_marginBottom="20dp"/>
+
+        <TextView tools:text="D20 D20 D20"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/hint"
+                  android:textSize="28dp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
+
+    </LinearLayout>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center" android:paddingTop="10dp"
+                 android:paddingBottom="10dp" android:background="#333333">
+        <TextView tools:text="Best: 180     Avg: 51" android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/statistics"
+                  android:textSize="18dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+                  android:layout_gravity="center"/>
+    </FrameLayout>
+
+</LinearLayout>

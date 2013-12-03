@@ -1,5 +1,5 @@
 
-package com.github.timnew.dartscoreboard.adapter;
+package com.github.timnew.dartscoreboard;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -63,6 +63,7 @@ public class PagerActionBarAdapter
 
     @Override
     public void onPageScrollStateChanged(int position) {
+
     }
 
     @Override
