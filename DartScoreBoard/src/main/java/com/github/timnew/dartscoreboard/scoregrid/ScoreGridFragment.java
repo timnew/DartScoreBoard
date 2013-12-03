@@ -1,7 +1,8 @@
-package com.github.timnew.dartscoreboard;
+package com.github.timnew.dartscoreboard.scoregrid;
 
 import android.support.v4.app.Fragment;
 import android.widget.GridView;
+import com.github.timnew.dartscoreboard.R;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EFragment;
 import com.googlecode.androidannotations.annotations.ViewById;

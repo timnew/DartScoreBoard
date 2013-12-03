@@ -1,6 +1,8 @@
-package com.github.timnew.dartscoreboard;
+package com.github.timnew.dartscoreboard.scoreboard;
 
 import android.support.v4.app.Fragment;
+import com.github.timnew.dartscoreboard.simplescoreboard.SimpleScoreFragment_;
+
 
 public enum MainFragmentActivityTabs implements FragmentBuilder {
     SimpleScore {

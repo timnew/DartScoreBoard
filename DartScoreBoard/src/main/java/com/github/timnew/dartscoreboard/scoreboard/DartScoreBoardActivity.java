@@ -1,14 +1,15 @@
 
-package com.github.timnew.dartscoreboard;
+package com.github.timnew.dartscoreboard.scoreboard;
 
 import android.support.v4.view.ViewPager;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.github.timnew.dartscoreboard.R;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.ViewById;
 
-@EActivity(R.layout.activity_main)
+@EActivity(R.layout.scoreboard_activity)
 public class DartScoreBoardActivity
         extends SherlockFragmentActivity {
 

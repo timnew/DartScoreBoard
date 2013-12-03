@@ -1,5 +1,5 @@
 
-package com.github.timnew.dartscoreboard;
+package com.github.timnew.dartscoreboard.scoreboard;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
