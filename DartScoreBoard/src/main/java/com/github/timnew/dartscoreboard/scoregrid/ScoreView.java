@@ -25,7 +25,20 @@ public class ScoreView extends FrameLayout {
     @ViewById(R.id.player_name)
     protected TextView playerName;
 
+    @ViewById(R.id.player_game_score)
+    protected TextView playGameScore;
+
+    @ViewById(R.id.hint)
+    protected TextView hint;
+
+
     public void updateView(PlayerScoreInfo scoreInfo) {
+        Context context = getContext();
+
         playerName.setText(scoreInfo.getPlayerName());
+
+        playGameScore.setText(context.getString(R.string.player_game_score_template, scoreInfo.getSets(), scoreInfo.getLegs()));
+
+        hint.setText(scoreInfo.getHint());
     }
 }

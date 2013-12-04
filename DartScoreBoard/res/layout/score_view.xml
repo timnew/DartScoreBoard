@@ -14,7 +14,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Player"
                 android:id="@+id/player_name"
-                android:layout_gravity="center" android:textSize="24dp"/>
+                android:layout_gravity="center" android:textSize="24sp"/>
     </FrameLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -25,8 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Sets: 0     Legs: 0"
-                android:id="@+id/sets_and_legs"
-                android:textSize="32dp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
+                android:id="@+id/player_game_score"
+                android:textSize="32sp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/hint"
-                  android:textSize="28dp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
+                  android:textSize="28sp" android:layout_gravity="center_horizontal" android:textColor="#EEEEEE"/>
 
     </LinearLayout>
 
@@ -48,10 +48,11 @@
                  android:layout_height="wrap_content"
                  android:gravity="center" android:paddingTop="10dp"
                  android:paddingBottom="10dp" android:background="#333333">
+
         <TextView tools:text="Best: 180     Avg: 51" android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/statistics"
-                  android:textSize="18dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+                  android:textSize="18sp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
                   android:layout_gravity="center"/>
     </FrameLayout>
 
