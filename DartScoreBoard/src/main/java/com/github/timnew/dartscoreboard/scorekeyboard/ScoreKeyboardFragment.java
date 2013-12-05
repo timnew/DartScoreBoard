@@ -56,4 +56,8 @@ public class ScoreKeyboardFragment extends Fragment {
     public void setKeyboardResultHandler(InputResultHandler handler) {
         segments.setInputResultHandler(handler);
     }
+
+    public void clear() {
+        segments.clear();
+    }
 }

@@ -195,6 +195,27 @@ public class ScoreViewTest {
         assertThat(view.findViewById(R.id.statistics)).has(text(""));
     }
 
+    @Test
+    public void should_highlight_active_user() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public boolean isActivated() {
+                return false;
+            }
+        });
+
+        assertThat(view.isSelected()).isFalse();
+
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public boolean isActivated() {
+                return true;
+            }
+        });
+
+        assertThat(view.isSelected()).isTrue();
+    }
+
     private static class PlayerScoreInfoStub implements PlayerScoreInfo {
 
         @Override
@@ -205,6 +226,11 @@ public class ScoreViewTest {
         @Override
         public int getTotalScore() {
             return 0;
+        }
+
+        @Override
+        public boolean submitScore(int score) {
+            return true;
         }
 
         @Override
@@ -230,6 +256,26 @@ public class ScoreViewTest {
         @Override
         public int getBest() {
             return 0;
+        }
+
+        @Override
+        public void win() {
+
+        }
+
+        @Override
+        public boolean isActivated() {
+            return false;
+        }
+
+        @Override
+        public PlayerScoreInfo deactivate() {
+            return this;
+        }
+
+        @Override
+        public PlayerScoreInfo activate() {
+            return this;
         }
     }
 }

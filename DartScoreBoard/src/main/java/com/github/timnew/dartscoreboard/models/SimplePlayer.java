@@ -1,10 +1,16 @@
-package com.github.timnew.dartscoreboard.scoregrid;
+package com.github.timnew.dartscoreboard.models;
+
+import com.github.timnew.dartscoreboard.scoregrid.PlayerScoreInfo;
 
 public class SimplePlayer implements PlayerScoreInfo {
     private String playerName;
     private int totalScore;
+    private boolean activated;
 
-    public SimplePlayer() {
+    public SimplePlayer(String playerName, int totalScore) {
+        this.playerName = playerName;
+        this.totalScore = totalScore;
+        activated = false;
     }
 
     @Override
@@ -25,11 +31,14 @@ public class SimplePlayer implements PlayerScoreInfo {
         this.totalScore = totalScore;
     }
 
-    public int subtractScore(int score) {
+    @Override
+    public boolean submitScore(int score) {
         if (score > totalScore)
-            return totalScore;
+            return false;
 
-        return totalScore -= score;
+        totalScore -= score;
+
+        return true;
     }
 
     @Override
@@ -55,5 +64,27 @@ public class SimplePlayer implements PlayerScoreInfo {
     @Override
     public int getBest() {
         return NOT_AVAILABLE;
+    }
+
+    @Override
+    public void win() {
+        // Do nothing
+    }
+
+    @Override
+    public boolean isActivated() {
+        return activated;
+    }
+
+    @Override
+    public PlayerScoreInfo activate() {
+        activated = true;
+        return this;
+    }
+
+    @Override
+    public PlayerScoreInfo deactivate() {
+        activated = false;
+        return this;
     }
 }

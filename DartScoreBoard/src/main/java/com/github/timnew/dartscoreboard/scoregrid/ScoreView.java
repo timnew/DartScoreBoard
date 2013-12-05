@@ -77,5 +77,7 @@ public class ScoreView extends FrameLayout {
         }
 
         statistics.setText(statisticsText);
+
+        this.setSelected(scoreInfo.isActivated());
     }
 }

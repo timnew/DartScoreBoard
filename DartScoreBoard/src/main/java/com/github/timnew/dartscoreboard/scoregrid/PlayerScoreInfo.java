@@ -7,6 +7,8 @@ public interface PlayerScoreInfo {
 
     int getTotalScore();
 
+    boolean submitScore(int score);
+
     int getSets();
 
     int getLegs();
@@ -16,4 +18,12 @@ public interface PlayerScoreInfo {
     float getAverage();
 
     int getBest();
+
+    void win();
+
+    boolean isActivated();
+
+    PlayerScoreInfo deactivate();
+
+    PlayerScoreInfo activate();
 }
