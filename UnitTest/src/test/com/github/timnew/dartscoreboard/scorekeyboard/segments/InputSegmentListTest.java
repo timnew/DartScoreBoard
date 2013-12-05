@@ -8,7 +8,6 @@ import org.junit.Test;
 import static com.github.timnew.dartscoreboard.builders.InputSegmentBuilder.newBustedSegment;
 import static com.github.timnew.dartscoreboard.builders.InputSegmentBuilder.newSegment;
 import static com.github.timnew.dartscoreboard.conditions.InputSegmentCondition.inputSegmentWith;
-import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.BUSTED;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.DOUBLE;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.NORMAL;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.TRIPLE;
@@ -73,7 +72,7 @@ public class InputSegmentListTest {
     public void should_get_total_score_0_for_busted() {
         list.push(newSegment(20, TRIPLE));
         list.push(newSegment(10, DOUBLE));
-        list.push(newSegment(0, BUSTED));
+        list.push(newBustedSegment());
 
         assertThat(list.getTotalScore()).isEqualTo(0);
     }

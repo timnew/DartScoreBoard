@@ -32,7 +32,7 @@ public class SegmentRender {
         addAll(ts, segments);
 
         if (ts.size() == 0)
-            return renderResult(buffer, segments);
+            return buffer;
 
         InputSegment first = ts.remove(0);
         if (first.isNew())

@@ -116,4 +116,17 @@ public class HybridSegmentTest {
         segment.setScoreFlag(BUSTED);
         assertThat(segment.getTotalScore()).isEqualTo(0);
     }
+
+    @Test
+    public void should_check_is_new() {
+        assertThat(segment.isNew()).isTrue();
+
+        segment.onDigit(8);
+
+        assertThat(segment.isNew()).isFalse();
+
+        segment.onBackspace();
+
+        assertThat(segment.isNew()).isTrue();
+    }
 }

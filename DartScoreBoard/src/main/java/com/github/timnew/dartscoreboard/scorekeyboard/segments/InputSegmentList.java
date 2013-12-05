@@ -39,7 +39,6 @@ public class InputSegmentList extends Stack<InputSegment> {
                 break;
             case BUST:
                 commit(0);
-                clear();
                 break;
         }
     }

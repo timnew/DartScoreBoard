@@ -31,6 +31,13 @@ public class SegmentRenderTest {
     }
 
     @Test
+    public void should_render_empty() {
+        Spanned rendered = render.render(inputSegmentList());
+
+        assertThat(rendered).has(contentText(""));
+    }
+
+    @Test
     public void should_render_busted() {
         Spanned rendered = render.render(inputSegmentList(newSegment(0, BUSTED)));
 
