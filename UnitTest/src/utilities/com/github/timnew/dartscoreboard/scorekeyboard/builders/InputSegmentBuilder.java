@@ -12,4 +12,8 @@ public class InputSegmentBuilder {
 
         return segment;
     }
+
+    public static HybridSegment newSegment() {
+        return new HybridSegment();
+    }
 }

@@ -13,15 +13,18 @@ import static com.github.timnew.dartscoreboard.scorekeyboard.SegmentKeyResult.UP
 
 public class HybridSegment implements InputSegment {
 
+    private boolean isNew;
     private int baseScore;
     private ScoreFlag scoreFlag;
 
     public HybridSegment() {
+        isNew = true;
         baseScore = 0;
         scoreFlag = NORMAL;
     }
 
     public void setBaseScore(int baseScore) {
+        isNew = false;
         this.baseScore = baseScore;
     }
 
@@ -31,6 +34,8 @@ public class HybridSegment implements InputSegment {
     }
 
     public void setScoreFlag(ScoreFlag scoreFlag) {
+        isNew = false;
+
         this.scoreFlag = scoreFlag;
 
         if (scoreFlag == BUSTED)
@@ -40,6 +45,11 @@ public class HybridSegment implements InputSegment {
     @Override
     public ScoreFlag getScoreFlag() {
         return scoreFlag;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
     }
 
     @Override
@@ -54,23 +64,27 @@ public class HybridSegment implements InputSegment {
 
     @Override
     public SegmentKeyResult onDigit(int digit) {
+        isNew = false;
         baseScore = baseScore * 10 + digit;
         return UPDATE;
     }
 
     @Override
     public SegmentKeyResult onTimes(ScoreFlag flag) {
+        isNew = false;
         scoreFlag = flag;
         return NEXT;
     }
 
     @Override
     public SegmentKeyResult onPlus() {
+        isNew = false;
         return NEXT;
     }
 
     @Override
     public SegmentKeyResult onEnter() {
+        isNew = false;
         return COMMIT;
     }
 
@@ -92,6 +106,8 @@ public class HybridSegment implements InputSegment {
 
     @Override
     public SegmentKeyResult onBust() {
+        isNew = false;
+
         setScoreFlag(BUSTED);
 
         return BUST;

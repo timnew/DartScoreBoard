@@ -1,9 +1,9 @@
 package com.github.timnew.dartscoreboard.scorekeyboard;
 
-import android.graphics.Color;
 import android.text.Spanned;
 
 import com.github.timnew.dartscoreboard.DartScoreBoardTestRunner;
+import com.github.timnew.dartscoreboard.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import static com.github.timnew.dartscoreboard.scorekeyboard.builders.InputSegme
 import static java.util.Arrays.asList;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.conditions.android.SpannedContentTextCondition.contentText;
-import static org.fest.assertions.conditions.android.SpannedTextColorCondition.textColor;
+import static org.fest.assertions.conditions.android.SpannedTextColorCondition.textResColor;
 
 @RunWith(DartScoreBoardTestRunner.class)
 public class SegmentRenderTest {
@@ -36,7 +36,7 @@ public class SegmentRenderTest {
 
         assertThat(rendered)
                 .has(contentText("Busted"))
-                .has(textColor(Color.RED));
+                .has(textResColor(R.color.score_busted_color));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SegmentRenderTest {
 
         assertThat(renedered)
                 .has(contentText("20"))
-                .has(textColor(0xFFCCCCCC));
+                .has(textResColor(R.color.score_base_color));
     }
 
     @Test
@@ -54,8 +54,8 @@ public class SegmentRenderTest {
 
         assertThat(renedered)
                 .has(contentText("20 x 2"))
-                .has(textColor(0xFFCCCCCC, 0, 1))
-                .has(textColor(Color.YELLOW, 3, 5));
+                .has(textResColor(R.color.score_base_color, 0, 1))
+                .has(textResColor(R.color.score_times_color, 3, 5));
     }
 
     @Test
@@ -64,5 +64,22 @@ public class SegmentRenderTest {
 
         assertThat(renedered)
                 .has(contentText("20 x 2 + 20 x 3 + 25"));
+    }
+
+    @Test
+    public void should_not_render_new() {
+        Spanned rendered = render.render(asList(newSegment()));
+
+        assertThat(rendered).has(contentText(""));
+    }
+
+    @Test
+    public void should_render_plus_correct() {
+        Spanned rendered = render.render(asList(newSegment(20, NORMAL), newSegment(20, NORMAL), newSegment()));
+
+        assertThat(rendered)
+                .has(contentText("20 + 20 + "))
+                .has(textResColor(R.color.score_plus, 3))
+                .has(textResColor(R.color.score_hint, 8));
     }
 }

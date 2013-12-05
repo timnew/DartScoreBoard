@@ -3,4 +3,6 @@
     <color name="score_base_color">#00FFFF</color>
     <color name="score_times_color">#FFFF00</color>
     <color name="score_busted_color">#FF0000</color>
+    <color name="score_plus">#CCCCCC</color>
+    <color name="score_hint">#55CCCCCC</color>
 </resources>

@@ -9,6 +9,8 @@ public interface InputSegment extends KeyPressHandler {
 
     ScoreFlag getScoreFlag();
 
+    boolean isNew();
+
     boolean isBusted();
 
     int getTotalScore();

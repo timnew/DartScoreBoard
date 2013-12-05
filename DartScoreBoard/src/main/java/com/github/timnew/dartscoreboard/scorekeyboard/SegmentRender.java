@@ -8,7 +8,15 @@ import android.text.style.ForegroundColorSpan;
 import com.github.timnew.dartscoreboard.R;
 import com.github.timnew.dartscoreboard.scorekeyboard.segments.InputSegment;
 
+import java.util.ArrayList;
+
+import static com.google.common.collect.Iterables.addAll;
+
 public class SegmentRender {
+    public static final String PLUS = " + ";
+    public static final String TIMES_2 = " x 2";
+    public static final String TIMES_3 = " x 3";
+    public static final String BUSTED = "Busted";
     private Context context;
 
     public SegmentRender(Context context) {
@@ -18,15 +26,32 @@ public class SegmentRender {
     public <T extends InputSegment> Spanned render(Iterable<T> segments) {
         SpannableStringBuilder buffer = new SpannableStringBuilder();
 
-        boolean first = true;
+        ArrayList<T> ts = new ArrayList<T>();
+        addAll(ts, segments);
 
-        for (InputSegment segment : segments) {
-            if (first) {
-                first = false;
-            } else {
-                buffer.append(" + ");
-            }
+        if (ts.size() == 0)
+            return buffer;
+
+        T first = ts.remove(0);
+        if (!first.isNew())
+            renderSegment(buffer, first);
+
+        if (ts.size() == 0)
+            return buffer;
+
+        int lastIndex = ts.size() - 1;
+        T last = ts.get(lastIndex);
+        if (last.isNew()) {
+            ts.remove(lastIndex);
+        }
+
+        for (T segment : ts) {
+            renderPlus(buffer, R.color.score_plus);
             renderSegment(buffer, segment);
+        }
+
+        if (last.isNew()) {
+            renderPlus(buffer, R.color.score_hint);
         }
 
         return buffer;
@@ -35,22 +60,36 @@ public class SegmentRender {
     private void renderSegment(SpannableStringBuilder buffer, InputSegment segment) {
         switch (segment.getScoreFlag()) {
             case NORMAL:
-                appendTextWithColor(buffer, Integer.toString(segment.getBaseScore()), getColor(R.color.score_base_color));
+                renderBaseScore(buffer, segment.getBaseScore());
                 break;
             case DOUBLE:
-                appendTextWithColor(buffer, Integer.toString(segment.getBaseScore()), getColor(R.color.score_base_color));
-                buffer.append(" ");
-                appendTextWithColor(buffer, "x 2", getColor(R.color.score_times_color));
+                renderBaseScore(buffer, segment.getBaseScore());
+                renderTimes(buffer, TIMES_2);
                 break;
             case TRIPLE:
-                appendTextWithColor(buffer, Integer.toString(segment.getBaseScore()), getColor(R.color.score_base_color));
-                buffer.append(" ");
-                appendTextWithColor(buffer, "x 3", getColor(R.color.score_times_color));
+                renderBaseScore(buffer, segment.getBaseScore());
+                renderTimes(buffer, TIMES_3);
                 break;
             case BUSTED:
-                appendTextWithColor(buffer, "Busted", getColor(R.color.score_busted_color));
+                renderBusted(buffer);
                 break;
         }
+    }
+
+    private void renderPlus(SpannableStringBuilder buffer, int color) {
+        appendTextWithColor(buffer, PLUS, getColor(color));
+    }
+
+    private void renderBaseScore(SpannableStringBuilder buffer, int baseScore) {
+        appendTextWithColor(buffer, Integer.toString(baseScore), getColor(R.color.score_base_color));
+    }
+
+    private void renderTimes(SpannableStringBuilder buffer, String text) {
+        appendTextWithColor(buffer, text, getColor(R.color.score_times_color));
+    }
+
+    private void renderBusted(SpannableStringBuilder buffer) {
+        appendTextWithColor(buffer, BUSTED, getColor(R.color.score_busted_color));
     }
 
     private int getColor(int resourceId) {
