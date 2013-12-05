@@ -1,7 +1,7 @@
 package com.github.timnew.dartscoreboard.scorekeyboard;
 
 public interface KeyPressHandler {
-    SegmentKeyResult onDigits(int digit);
+    SegmentKeyResult onDigit(int digit);
 
     SegmentKeyResult onTimes(ScoreFlag flag);
 

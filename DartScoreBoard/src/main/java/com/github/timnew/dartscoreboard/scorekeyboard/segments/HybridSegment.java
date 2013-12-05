@@ -53,7 +53,7 @@ public class HybridSegment implements InputSegment {
     }
 
     @Override
-    public SegmentKeyResult onDigits(int digit) {
+    public SegmentKeyResult onDigit(int digit) {
         baseScore = baseScore * 10 + digit;
         return UPDATE;
     }
