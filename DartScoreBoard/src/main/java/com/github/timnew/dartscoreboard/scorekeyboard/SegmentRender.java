@@ -7,6 +7,7 @@ import android.text.style.ForegroundColorSpan;
 
 import com.github.timnew.dartscoreboard.R;
 import com.github.timnew.dartscoreboard.scorekeyboard.segments.InputSegment;
+import com.github.timnew.dartscoreboard.scorekeyboard.segments.InputSegmentList;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class SegmentRender {
     public static final String PLUS = " + ";
     public static final String TIMES_2 = " x 2";
     public static final String TIMES_3 = " x 3";
+    public static final String EQUALS = " = ";
     public static final String BUSTED = "Busted";
     private Context context;
 
@@ -23,30 +25,32 @@ public class SegmentRender {
         this.context = context;
     }
 
-    public <T extends InputSegment> Spanned render(Iterable<T> segments) {
+    public Spanned render(InputSegmentList segments) {
         SpannableStringBuilder buffer = new SpannableStringBuilder();
 
-        ArrayList<T> ts = new ArrayList<T>();
+        ArrayList<InputSegment> ts = new ArrayList<InputSegment>();
         addAll(ts, segments);
 
         if (ts.size() == 0)
+            return renderResult(buffer, segments);
+
+        InputSegment first = ts.remove(0);
+        if (first.isNew())
             return buffer;
 
-        T first = ts.remove(0);
-        if (!first.isNew())
-            renderSegment(buffer, first);
+        renderSegment(buffer, first);
 
         if (ts.size() == 0)
-            return buffer;
+            return renderResult(buffer, segments);
 
         int lastIndex = ts.size() - 1;
-        T last = ts.get(lastIndex);
+        InputSegment last = ts.get(lastIndex);
         if (last.isNew()) {
             ts.remove(lastIndex);
         }
 
-        for (T segment : ts) {
-            renderPlus(buffer, R.color.score_plus);
+        for (InputSegment segment : ts) {
+            renderPlus(buffer, R.color.score_symbol);
             renderSegment(buffer, segment);
         }
 
@@ -54,7 +58,7 @@ public class SegmentRender {
             renderPlus(buffer, R.color.score_hint);
         }
 
-        return buffer;
+        return renderResult(buffer, segments);
     }
 
     private void renderSegment(SpannableStringBuilder buffer, InputSegment segment) {
@@ -74,6 +78,16 @@ public class SegmentRender {
                 renderBusted(buffer);
                 break;
         }
+    }
+
+    private Spanned renderResult(SpannableStringBuilder buffer, InputSegmentList segments) {
+        appendTextWithColor(buffer, EQUALS, getColor(R.color.score_symbol));
+        if (segments.isBusted())
+            appendTextWithColor(buffer, BUSTED, getColor(R.color.score_busted_color));
+        else
+            appendTextWithColor(buffer, Integer.toString(segments.getTotalScore()), getColor(R.color.score_result));
+
+        return buffer;
     }
 
     private void renderPlus(SpannableStringBuilder buffer, int color) {

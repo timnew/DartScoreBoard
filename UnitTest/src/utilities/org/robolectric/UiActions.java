@@ -1,8 +1,6 @@
-package com.github.timnew.dartscoreboard;
+package org.robolectric;
 
 import android.view.View;
-
-import org.robolectric.Robolectric;
 
 public class UiActions {
 

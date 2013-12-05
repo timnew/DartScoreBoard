@@ -49,13 +49,22 @@ public class InputSegmentList extends Stack<InputSegment> {
             inputResultHandler.onCommit(totalScore);
     }
 
+    public boolean isBusted() {
+        for (InputSegment segment : this) {
+            if (segment.isBusted())
+                return true;
+        }
+
+        return false;
+    }
+
     public int getTotalScore() {
+        if (isBusted())
+            return 0;
+
         int totalScore = 0;
 
         for (InputSegment segment : this) {
-            if (segment.isBusted())
-                return 0;
-
             totalScore += segment.getTotalScore();
         }
 

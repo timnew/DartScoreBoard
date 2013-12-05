@@ -5,12 +5,13 @@ import com.github.timnew.dartscoreboard.scorekeyboard.SegmentKeyResult;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.github.timnew.dartscoreboard.builders.InputSegmentBuilder.newBustedSegment;
+import static com.github.timnew.dartscoreboard.builders.InputSegmentBuilder.newSegment;
 import static com.github.timnew.dartscoreboard.conditions.InputSegmentCondition.inputSegmentWith;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.BUSTED;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.DOUBLE;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.NORMAL;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.TRIPLE;
-import static com.github.timnew.dartscoreboard.scorekeyboard.builders.InputSegmentBuilder.newSegment;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class InputSegmentListTest {
@@ -95,6 +96,17 @@ public class InputSegmentListTest {
         list.onResult(SegmentKeyResult.COMMIT);
 
         assertThat(result[0]).isEqualTo(60);
+    }
+
+    @Test
+    public void should_detect_busted() {
+        list.push(newSegment(20, NORMAL));
+
+        assertThat(list.isBusted()).isFalse();
+
+        list.push(newBustedSegment());
+
+        assertThat(list.isBusted()).isTrue();
     }
 
     @Test

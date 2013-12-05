@@ -12,12 +12,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.github.timnew.dartscoreboard.UiActions.clickOn;
 import static com.google.common.collect.Iterables.toArray;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.primitives.Ints.asList;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.conditions.android.ContainsTextCondition.text;
+import static org.robolectric.UiActions.clickOn;
 import static org.robolectric.util.FragmentTestUtil.startFragment;
 
 @RunWith(DartScoreBoardTestRunner.class)

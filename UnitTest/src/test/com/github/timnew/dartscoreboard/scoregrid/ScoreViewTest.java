@@ -2,6 +2,7 @@ package com.github.timnew.dartscoreboard.scoregrid;
 
 import com.github.timnew.dartscoreboard.DartScoreBoardTestRunner;
 import com.github.timnew.dartscoreboard.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,18 +63,6 @@ public class ScoreViewTest {
     }
 
     @Test
-    public void should_render_sets() {
-        view.updateView(new PlayerScoreInfoStub() {
-            @Override
-            public int getTotalScore() {
-                return 501;
-            }
-        });
-
-        assertThat(view.findViewById(R.id.total_score)).has(text("501"));
-    }
-
-    @Test
     public void should_render_hint() {
         view.updateView(new PlayerScoreInfoStub() {
             @Override
@@ -90,7 +79,7 @@ public class ScoreViewTest {
         view.updateView(new PlayerScoreInfoStub() {
             @Override
             public float getAverage() {
-                return 120.25f;
+                return 120.2514342f;
             }
 
             @Override
@@ -99,7 +88,7 @@ public class ScoreViewTest {
             }
         });
 
-        assertThat(view.findViewById(R.id.statistics)).has(text(R.string.player_statistics_template, 180, 120.25f));
+        assertThat(view.findViewById(R.id.statistics)).has(text("Best: 180 Avg: 120.25"));
     }
 
 
