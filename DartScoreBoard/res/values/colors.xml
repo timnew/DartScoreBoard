@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="score_base_color">#CCCCCC</color>
+    <color name="score_times_color">#FFFF00</color>
+    <color name="score_busted_color">#FF0000</color>
+</resources>

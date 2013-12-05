@@ -25,6 +25,7 @@ public class HybridSegment implements InputSegment {
         this.baseScore = baseScore;
     }
 
+    @Override
     public int getBaseScore() {
         return baseScore;
     }
@@ -36,14 +37,17 @@ public class HybridSegment implements InputSegment {
             baseScore = 0;
     }
 
+    @Override
     public ScoreFlag getScoreFlag() {
         return scoreFlag;
     }
 
+    @Override
     public boolean isBusted() {
         return scoreFlag == BUSTED;
     }
 
+    @Override
     public int getTotalScore() {
         return scoreFlag.applyToBaseScore(baseScore);
     }
