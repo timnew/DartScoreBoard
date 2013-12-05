@@ -14,6 +14,7 @@ import org.robolectric.Robolectric;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.BUSTED;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.DOUBLE;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.NORMAL;
+import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.TRIPLE;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.conditions.android.SpannedContentTextCondition.contentText;
@@ -61,8 +62,16 @@ public class SegmentRenderTest {
         Spanned renedered = render.render(asList(newSegment(20, DOUBLE)));
 
         assertThat(renedered)
-                .has(contentText("20x2"))
+                .has(contentText("20 x 2"))
                 .has(textColor(0xFFCCCCCC, 0, 1))
-                .has(textColor(Color.YELLOW, 2, 3));
+                .has(textColor(Color.YELLOW, 3, 5));
+    }
+
+    @Test
+    public void should_render_plus() {
+        Spanned renedered = render.render(asList(newSegment(20, DOUBLE), newSegment(20, TRIPLE), newSegment(25, NORMAL)));
+
+        assertThat(renedered)
+                .has(contentText("20 x 2 + 20 x 3 + 25"));
     }
 }

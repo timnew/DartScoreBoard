@@ -18,7 +18,14 @@ public class SegmentRender {
     public <T extends InputSegment> Spanned render(Iterable<T> segments) {
         SpannableStringBuilder buffer = new SpannableStringBuilder();
 
+        boolean first = true;
+
         for (InputSegment segment : segments) {
+            if (first) {
+                first = false;
+            } else {
+                buffer.append(" + ");
+            }
             renderSegment(buffer, segment);
         }
 
@@ -32,11 +39,13 @@ public class SegmentRender {
                 break;
             case DOUBLE:
                 appendTextWithColor(buffer, Integer.toString(segment.getBaseScore()), getColor(R.color.score_base_color));
-                appendTextWithColor(buffer, String.format("x%d", 2), getColor(R.color.score_times_color));
+                buffer.append(" ");
+                appendTextWithColor(buffer, "x 2", getColor(R.color.score_times_color));
                 break;
             case TRIPLE:
                 appendTextWithColor(buffer, Integer.toString(segment.getBaseScore()), getColor(R.color.score_base_color));
-                appendTextWithColor(buffer, String.format("x%d", 3), getColor(R.color.score_times_color));
+                buffer.append(" ");
+                appendTextWithColor(buffer, "x 3", getColor(R.color.score_times_color));
                 break;
             case BUSTED:
                 appendTextWithColor(buffer, "Busted", getColor(R.color.score_busted_color));
