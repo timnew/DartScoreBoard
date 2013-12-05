@@ -1,10 +1,9 @@
 package com.github.timnew.dartscoreboard.scorekeyboard.segments;
 
-import com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.github.timnew.dartscoreboard.conditions.InputSegmentCondition.inputSegmentWith;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.BUSTED;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.DOUBLE;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.NORMAL;
@@ -27,26 +26,21 @@ public class HybridSegmentTest {
 
     @Test
     public void should_initialize_segment() {
-        assertSegment(0, NORMAL);
-    }
-
-    private void assertSegment(int baseScore, ScoreFlag scoreFlag) {
-        assertThat(segment.getBaseScore()).isEqualTo(baseScore);
-        assertThat(segment.getScoreFlag()).isEqualTo(scoreFlag);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
     }
 
     @Test
     public void should_handle_digit_input() {
-        assertSegment(0, NORMAL);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
 
-        assertThat(segment.onDigits(1)).isEqualTo(UPDATE);
-        assertSegment(1, NORMAL);
+        assertThat(segment.onDigit(1)).isEqualTo(UPDATE);
+        assertThat(segment).is(inputSegmentWith(1, NORMAL));
 
-        assertThat(segment.onDigits(5)).isEqualTo(UPDATE);
-        assertSegment(15, NORMAL);
+        assertThat(segment.onDigit(5)).isEqualTo(UPDATE);
+        assertThat(segment).is(inputSegmentWith(15, NORMAL));
 
-        assertThat(segment.onDigits(8)).isEqualTo(UPDATE);
-        assertSegment(158, NORMAL);
+        assertThat(segment.onDigit(8)).isEqualTo(UPDATE);
+        assertThat(segment).is(inputSegmentWith(158, NORMAL));
     }
 
     @Test
@@ -54,24 +48,24 @@ public class HybridSegmentTest {
         assertThat(segment.getScoreFlag()).isEqualTo(NORMAL);
 
         assertThat(segment.onTimes(DOUBLE)).isEqualTo(NEXT);
-        assertSegment(0, DOUBLE);
+        assertThat(segment).is(inputSegmentWith(0, DOUBLE));
 
         assertThat(segment.onTimes(TRIPLE)).isEqualTo(NEXT);
-        assertSegment(0, TRIPLE);
+        assertThat(segment).is(inputSegmentWith(0, TRIPLE));
     }
 
     @Test
     public void should_handle_enter() {
         assertThat(segment.onEnter()).isEqualTo(COMMIT);
 
-        assertSegment(0, NORMAL);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
     }
 
     @Test
     public void should_handle_plus() {
         assertThat(segment.onPlus()).isEqualTo(NEXT);
 
-        assertSegment(0, NORMAL);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
     }
 
     @Test
@@ -80,7 +74,7 @@ public class HybridSegmentTest {
 
         assertThat(segment.onBust()).isEqualTo(BUST);
 
-        assertSegment(0, BUSTED);
+        assertThat(segment).is(inputSegmentWith(0, BUSTED));
 
         assertThat(segment.isBusted()).isTrue();
     }
@@ -91,13 +85,13 @@ public class HybridSegmentTest {
         segment.setScoreFlag(DOUBLE);
 
         assertThat(segment.onBackspace()).isEqualTo(UPDATE);
-        assertSegment(20, NORMAL);
+        assertThat(segment).is(inputSegmentWith(20, NORMAL));
 
         assertThat(segment.onBackspace()).isEqualTo(UPDATE);
-        assertSegment(2, NORMAL);
+        assertThat(segment).is(inputSegmentWith(2, NORMAL));
 
         assertThat(segment.onBackspace()).isEqualTo(DELETE);
-        assertSegment(0, NORMAL);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
     }
 
     @Test
@@ -105,7 +99,7 @@ public class HybridSegmentTest {
         segment.onBust();
 
         assertThat(segment.onBackspace()).isEqualTo(UPDATE);
-        assertSegment(0, NORMAL);
+        assertThat(segment).is(inputSegmentWith(0, NORMAL));
     }
 
     @Test

@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.text.Spanned;
 
 import com.github.timnew.dartscoreboard.DartScoreBoardTestRunner;
-import com.github.timnew.dartscoreboard.scorekeyboard.segments.HybridSegment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +14,7 @@ import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.BUSTED;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.DOUBLE;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.NORMAL;
 import static com.github.timnew.dartscoreboard.scorekeyboard.ScoreFlag.TRIPLE;
+import static com.github.timnew.dartscoreboard.scorekeyboard.builders.InputSegmentBuilder.newSegment;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.conditions.android.SpannedContentTextCondition.contentText;
@@ -28,15 +28,6 @@ public class SegmentRenderTest {
     @Before
     public void setUp() throws Exception {
         render = new SegmentRender(Robolectric.application);
-    }
-
-    private HybridSegment newSegment(int baseScore, ScoreFlag flag) {
-        HybridSegment segment = new HybridSegment();
-
-        segment.setBaseScore(baseScore);
-        segment.setScoreFlag(flag);
-
-        return segment;
     }
 
     @Test
