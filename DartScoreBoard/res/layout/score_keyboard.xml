@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:stretchColumns="*">
@@ -11,7 +12,9 @@
             android:id="@+id/current_input"
             android:layout_span="4"
             android:editable="false"
-            android:inputType="none" />
+            android:inputType="none"
+            tools:text="BUSTED"
+            android:gravity="center" />
     </TableRow>
 
     <TableRow>
