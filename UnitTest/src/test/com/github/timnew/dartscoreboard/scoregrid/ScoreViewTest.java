@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.conditions.android.ContainsTextCondition.revealText;
 import static org.fest.assertions.conditions.android.ContainsTextCondition.text;
 
 @RunWith(DartScoreBoardTestRunner.class)
@@ -46,7 +47,7 @@ public class ScoreViewTest {
     }
 
     @Test
-    public void should_render_player_game_scores() {
+    public void should_render_sets_and_legs() {
         view.updateView(new PlayerScoreInfoStub() {
             @Override
             public int getSets() {
@@ -59,7 +60,58 @@ public class ScoreViewTest {
             }
         });
 
-        assertThat(view.findViewById(R.id.player_game_score)).has(text(R.string.player_game_score_template, 1, 3));
+        assertThat(view.findViewById(R.id.player_game_score)).has(text("Sets: 1 Legs: 3"));
+    }
+
+    @Test
+    public void should_render_legs_only() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public int getSets() {
+                return NOT_AVAILABLE;
+            }
+
+            @Override
+            public int getLegs() {
+                return 3;
+            }
+        });
+
+        assertThat(view.findViewById(R.id.player_game_score)).has(text("Legs: 3"));
+    }
+
+    @Test
+    public void should_render_sets_only() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public int getSets() {
+                return 1;
+            }
+
+            @Override
+            public int getLegs() {
+                return NOT_AVAILABLE;
+            }
+        });
+
+        assertThat(view.findViewById(R.id.player_game_score)).has(text("Sets: 1"));
+    }
+
+    @Test
+    public void should_hide_sets_and_legs() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public int getSets() {
+                return NOT_AVAILABLE;
+            }
+
+            @Override
+            public int getLegs() {
+                return NOT_AVAILABLE;
+            }
+        });
+
+        assertThat(view.findViewById(R.id.player_game_score)).has(text(""));
     }
 
     @Test
@@ -91,6 +143,57 @@ public class ScoreViewTest {
         assertThat(view.findViewById(R.id.statistics)).has(text("Best: 180 Avg: 120.25"));
     }
 
+    @Test
+    public void should_render_best_only() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public float getAverage() {
+                return NOT_AVAILABLE;
+            }
+
+            @Override
+            public int getBest() {
+                return 180;
+            }
+        });
+
+        assertThat(view.findViewById(R.id.statistics)).has(text("Best: 180"));
+    }
+
+    @Test
+    public void should_render_average_only() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public float getAverage() {
+                return 125;
+            }
+
+            @Override
+            public int getBest() {
+                return NOT_AVAILABLE;
+            }
+        });
+
+        revealText(view.findViewById(R.id.statistics));
+        assertThat(view.findViewById(R.id.statistics)).has(text("Avg: 125.00"));
+    }
+
+    @Test
+    public void should_hide_statistics() {
+        view.updateView(new PlayerScoreInfoStub() {
+            @Override
+            public float getAverage() {
+                return NOT_AVAILABLE;
+            }
+
+            @Override
+            public int getBest() {
+                return NOT_AVAILABLE;
+            }
+        });
+
+        assertThat(view.findViewById(R.id.statistics)).has(text(""));
+    }
 
     private static class PlayerScoreInfoStub implements PlayerScoreInfo {
 

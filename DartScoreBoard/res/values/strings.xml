@@ -3,7 +3,9 @@
     <string name="app_name">Dart Score Board</string>
     <string name="menu_settings">Settings</string>
 
-    <string name="player_game_score_template">Sets: %1$d Legs: %2$d</string>
-    <string name="player_statistics_template">Best: %1$d Avg: %2$.2f</string>
+    <string name="player_game_sets_template">Sets: %d</string>
+    <string name="player_game_legs_template">Legs: %d</string>
+    <string name="player_statistics_best_template">Best: %d</string>
+    <string name="player_statistics_average_template">Avg: %.2f</string>
 
 </resources>

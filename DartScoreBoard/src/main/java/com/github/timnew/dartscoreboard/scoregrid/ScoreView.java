@@ -27,7 +27,7 @@ public class ScoreView extends FrameLayout {
     protected TextView playerName;
 
     @ViewById(R.id.player_game_score)
-    protected TextView playGameScore;
+    protected TextView playerGameScore;
 
 
     @ViewById(R.id.total_score)
@@ -45,12 +45,37 @@ public class ScoreView extends FrameLayout {
 
         playerName.setText(scoreInfo.getPlayerName());
 
-        playGameScore.setText(context.getString(R.string.player_game_score_template, scoreInfo.getSets(), scoreInfo.getLegs()));
+        StringBuilder gameScoreText = new StringBuilder();
+
+        if (scoreInfo.getSets() >= 0)
+            gameScoreText.append(context.getString(R.string.player_game_sets_template, scoreInfo.getSets()));
+
+        if (scoreInfo.getLegs() >= 0) {
+            if (gameScoreText.length() > 0)
+                gameScoreText.append(" ");
+
+            gameScoreText.append(context.getString(R.string.player_game_legs_template, scoreInfo.getLegs()));
+        }
+
+        playerGameScore.setText(gameScoreText);
 
         totalScore.setText(Integer.toString(scoreInfo.getTotalScore()));
 
         hint.setText(scoreInfo.getHint());
 
-        statistics.setText(getContext().getString(R.string.player_statistics_template, scoreInfo.getBest(), scoreInfo.getAverage()));
+        StringBuilder statisticsText = new StringBuilder();
+
+        if (scoreInfo.getBest() >= 0) {
+            statisticsText.append(context.getString(R.string.player_statistics_best_template, scoreInfo.getBest()));
+        }
+
+        if (scoreInfo.getAverage() >= 0) {
+            if (statisticsText.length() > 0)
+                statisticsText.append(" ");
+
+            statisticsText.append(context.getString(R.string.player_statistics_average_template, scoreInfo.getAverage()));
+        }
+
+        statistics.setText(statisticsText);
     }
 }
