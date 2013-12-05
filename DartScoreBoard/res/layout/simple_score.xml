@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <fragment android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:name="com.github.timnew.dartscoreboard.ScoreGridFragment_"
-              android:id="@+id/score_grid"
-              tools:layout="@layout/score_grid"
-              android:layout_above="@+id/keyboard"
-              android:layout_alignParentTop="true"/>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.github.timnew.dartscoreboard.scoregrid.ScoreGridFragment_"
+        android:id="@+id/score_grid"
+        tools:layout="@layout/score_grid"
+        android:layout_above="@+id/keyboard"
+        android:layout_alignParentTop="true" />
 
-    <fragment android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:name="com.github.timnew.dartscoreboard.ScoreKeyboardFragment_"
-              android:id="@+id/keyboard"
-              android:layout_alignParentBottom="true"
-              tools:layout="@layout/score_keyboard"/>
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.github.timnew.dartscoreboard.scorekeyboard.ScoreKeyboardFragment_"
+        android:id="@+id/keyboard"
+        android:layout_alignParentBottom="true"
+        tools:layout="@layout/score_keyboard" />
 
 </RelativeLayout>

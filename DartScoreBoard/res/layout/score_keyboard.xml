@@ -1,34 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:stretchColumns="*">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*">
+
     <TableRow>
-        <EditText android:layout_span="4"/>
+
+        <EditText
+            android:id="@+id/current_input"
+            android:layout_span="4"
+            android:editable="false"
+            android:inputType="none" />
     </TableRow>
+
     <TableRow>
-        <Button android:text="1" android:id="@+id/d1"/>
-        <Button android:text="2" android:id="@+id/d2"/>
-        <Button android:text="3" android:id="@+id/d3"/>
-        <Button android:text="&lt;-" android:id="@+id/back"/>
+
+        <Button
+            android:id="@+id/d1"
+            android:text="1"
+            android:tag="D1" />
+
+        <Button
+            android:id="@+id/d2"
+            android:text="2"
+            android:tag="D2" />
+
+        <Button
+            android:id="@+id/d3"
+            android:text="3"
+            android:tag="D3" />
+
+        <Button
+            android:id="@+id/backspace"
+            android:text="&lt;-"
+            android:tag="BACKSPACE" />
     </TableRow>
+
     <TableRow>
-        <Button android:text="4" android:id="@+id/d4"/>
-        <Button android:text="5" android:id="@+id/d5"/>
-        <Button android:text="6" android:id="@+id/d6"/>
-        <Button android:text="Bust" android:id="@+id/bust"/>
+
+        <Button
+            android:id="@+id/d4"
+            android:text="4"
+            android:tag="D4" />
+
+        <Button
+            android:id="@+id/d5"
+            android:text="5"
+            android:tag="D5" />
+
+        <Button
+            android:id="@+id/d6"
+            android:text="6"
+            android:tag="D6" />
+
+        <Button
+            android:id="@+id/bust"
+            android:text="Bust"
+            android:tag="BUST" />
     </TableRow>
+
     <TableRow>
-        <Button android:text="7" android:id="@+id/d7"/>
-        <Button android:text="8" android:id="@+id/d8"/>
-        <Button android:text="9" android:id="@+id/d9"/>
-        <Button android:text="+" android:id="@+id/plus"/>
+
+        <Button
+            android:id="@+id/d7"
+            android:text="7"
+            android:tag="D7" />
+
+        <Button
+            android:id="@+id/d8"
+            android:text="8"
+            android:tag="D8" />
+
+        <Button
+            android:id="@+id/d9"
+            android:text="9"
+            android:tag="D9" />
+
+        <Button
+            android:id="@+id/plus"
+            android:text="+"
+            android:tag="PLUS" />
     </TableRow>
+
     <TableRow>
-        <Button android:text="x2" android:id="@+id/doubleTimes"/>
-        <Button android:text="0" android:id="@+id/d0"/>
-        <Button android:text="x3" android:id="@+id/tripleTimes"/>
-        <Button android:text="Ok" android:id="@+id/ok"/>
+
+        <Button
+            android:id="@+id/x2"
+            android:text="x2"
+            android:tag="DOUBLE" />
+
+        <Button
+            android:id="@+id/d0"
+            android:text="0"
+            android:tag="D0" />
+
+        <Button
+            android:id="@+id/x3"
+            android:text="x3"
+            android:tag="TRIPLE" />
+
+        <Button
+            android:id="@+id/enter"
+            android:text="Ok"
+            android:tag="ENTER" />
     </TableRow>
 </TableLayout>
