@@ -2,6 +2,7 @@ package com.github.timnew.dartscoreboard.scoregrid;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,9 @@ public class ScoreView extends FrameLayout {
     public ScoreView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
+    @ViewById(R.id.activate_indicator)
+    protected View activeIndicator;
 
     @ViewById(R.id.player_name)
     protected TextView playerName;
@@ -78,6 +82,10 @@ public class ScoreView extends FrameLayout {
 
         statistics.setText(statisticsText);
 
-        this.setSelected(scoreInfo.isActivated());
+        if (scoreInfo.isActivated()) {
+            activeIndicator.setBackgroundResource(R.color.score_view_background_activate);
+        } else {
+            activeIndicator.setBackgroundResource(R.color.score_view_background);
+        }
     }
 }

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.conditions.android.ContainsBackgroundCondition.backgroundResColor;
 import static org.fest.assertions.conditions.android.ContainsTextCondition.revealText;
 import static org.fest.assertions.conditions.android.ContainsTextCondition.text;
 
@@ -204,7 +205,7 @@ public class ScoreViewTest {
             }
         });
 
-        assertThat(view.isSelected()).isFalse();
+        assertThat(view.findViewById(R.id.activate_indicator)).has(backgroundResColor(R.color.score_view_background));
 
         view.updateView(new PlayerScoreInfoStub() {
             @Override
@@ -213,7 +214,7 @@ public class ScoreViewTest {
             }
         });
 
-        assertThat(view.isSelected()).isTrue();
+        assertThat(view.findViewById(R.id.activate_indicator)).has(backgroundResColor(R.color.score_view_background_activate));
     }
 
     private static class PlayerScoreInfoStub implements PlayerScoreInfo {
