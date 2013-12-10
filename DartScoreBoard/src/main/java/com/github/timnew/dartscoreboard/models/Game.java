@@ -11,6 +11,7 @@ public class Game {
 
     private List<PlayerScoreInfo> players;
     private int currentPlayerIndex;
+    private GameWatcher gameWatcher;
 
     public Game(List<PlayerScoreInfo> players) {
         this.players = players;
@@ -42,11 +43,13 @@ public class Game {
         nextPlayer();
 
         if (currentPlayer.getTotalScore() == 0)
-            playerWin(currentPlayer);
+            gameFinish(currentPlayer);
     }
 
-    private void playerWin(PlayerScoreInfo currentSimplePlayer) {
-        currentSimplePlayer.win();
+    private void gameFinish(PlayerScoreInfo player) {
+        player.win();
+        if (gameWatcher != null)
+            gameWatcher.gameFinish(player);
     }
 
     public static Game newSimpleGame(int playerCount, int totalScore) {
@@ -59,5 +62,13 @@ public class Game {
         }
 
         return new Game(players);
+    }
+
+    public void setGameWatcher(GameWatcher gameWatcher) {
+        this.gameWatcher = gameWatcher;
+    }
+
+    public static interface GameWatcher {
+        void gameFinish(PlayerScoreInfo player);
     }
 }
