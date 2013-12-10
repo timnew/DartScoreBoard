@@ -34,6 +34,7 @@ proguard_logs/
 *.iws
 .idea/
 
-adt-bundle-windows-x86_64/
 DartScoreBoard/gen-external-apklibs/
 DartScoreBoard/target/
+DartScoreBoard/out/
+UnitTest/target/
