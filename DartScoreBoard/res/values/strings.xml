@@ -1,7 +1,9 @@
 <resources>
 
     <string name="app_name">Dart Score Board</string>
+
     <string name="menu_settings">Settings</string>
+    <string name="menu_remote_score_board">Remote Score Board</string>
 
     <string name="player_game_sets_template">Sets: %d</string>
     <string name="player_game_legs_template">Legs: %d</string>

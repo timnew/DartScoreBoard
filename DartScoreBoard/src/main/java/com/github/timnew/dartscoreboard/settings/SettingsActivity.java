@@ -1,48 +1,28 @@
 package com.github.timnew.dartscoreboard.settings;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.support.v4.app.FragmentActivity;
 
 import com.github.timnew.dartscoreboard.R;
-import com.github.timnew.shared.ActivityResultManager;
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Bean;
-import com.googlecode.androidannotations.annotations.EActivity;
 
-@EActivity(R.layout.settings_activity)
-public class SettingsActivity extends Activity {
-
-    @Bean
-    protected ActivityResultManager resultManager;
-
-    @AfterViews
-    protected void configBlueTooth() {
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (mBluetoothAdapter == null) {
-            // Device does not support Bluetooth
-            return;
-        }
-
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            resultManager.startActivityForResult(enableBtIntent, new ActivityResultManager.ActivityResultHandler() {
-                @Override
-                public void onResult(int resultCode, Intent data) {
-                    onBlueToothDialogResult(resultCode == RESULT_OK);
-                }
-            });
-        }
-    }
-
-    private void onBlueToothDialogResult(boolean isEnabled) {
-
-    }
+public class SettingsActivity extends FragmentActivity {
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        resultManager.onActivityResult(requestCode, resultCode, data);
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
+    }
+
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            addPreferencesFromResource(R.xml.settings);
+        }
     }
 }
