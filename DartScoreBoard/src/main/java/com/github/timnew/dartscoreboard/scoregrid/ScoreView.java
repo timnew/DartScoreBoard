@@ -12,6 +12,7 @@ import com.googlecode.androidannotations.annotations.ViewById;
 
 @EViewGroup(R.layout.score_view)
 public class ScoreView extends FrameLayout {
+
     public ScoreView(Context context) {
         super(context);
     }

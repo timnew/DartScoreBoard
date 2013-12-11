@@ -14,11 +14,13 @@ import java.util.ArrayList;
 import static com.google.common.collect.Iterables.addAll;
 
 public class SegmentRender {
+
     public static final String PLUS = " + ";
     public static final String TIMES_2 = " x 2";
     public static final String TIMES_3 = " x 3";
     public static final String EQUALS = " = ";
     public static final String BUSTED = "Busted";
+
     private Context context;
 
     public SegmentRender(Context context) {

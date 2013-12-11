@@ -3,6 +3,7 @@ package com.github.timnew.dartscoreboard.models;
 import com.github.timnew.dartscoreboard.scoregrid.PlayerScoreInfo;
 
 public class SimplePlayer implements PlayerScoreInfo {
+
     private String playerName;
     private int totalScore;
     private boolean activated;

@@ -2,6 +2,7 @@
 package com.github.timnew.dartscoreboard;
 
 import android.app.Application;
+
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 

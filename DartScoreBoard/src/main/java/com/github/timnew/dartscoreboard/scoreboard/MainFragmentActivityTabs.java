@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import com.github.timnew.dartscoreboard.simplescoreboard.SimpleScoreFragment_;
 
 public enum MainFragmentActivityTabs implements FragmentBuilder {
+
     SimpleScore {
         @Override
         public Fragment buildFragment() {

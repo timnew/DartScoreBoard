@@ -1,6 +1,7 @@
 package com.github.timnew.dartscoreboard.scoregrid;
 
 public interface PlayerScoreInfo {
+
     public static int NOT_AVAILABLE = -1;
 
     CharSequence getPlayerName();

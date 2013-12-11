@@ -4,7 +4,10 @@ import com.github.timnew.dartscoreboard.scoregrid.PlayerScoreInfo;
 
 import java.util.ArrayList;
 
-public class CompositeGameWatcher extends ArrayList<GameWatcher> implements GameWatcher {
+public class CompositeGameWatcher
+        extends ArrayList<GameWatcher>
+        implements GameWatcher {
+
     @Override
     public void gameFinish(PlayerScoreInfo player) {
         for (GameWatcher watcher : this)
