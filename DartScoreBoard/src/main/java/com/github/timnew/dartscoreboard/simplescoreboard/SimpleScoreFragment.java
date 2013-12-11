@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 
 import com.github.timnew.dartscoreboard.R;
 import com.github.timnew.dartscoreboard.models.Game;
+import com.github.timnew.dartscoreboard.models.GameHost;
+import com.github.timnew.dartscoreboard.models.GameWatcherAdapter;
 import com.github.timnew.dartscoreboard.scoregrid.PlayerScoreInfo;
 import com.github.timnew.dartscoreboard.scoregrid.ScoreGridFragment;
 import com.github.timnew.dartscoreboard.scorekeyboard.ScoreKeyboardFragment;
@@ -14,10 +16,8 @@ import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EFragment;
 import com.googlecode.androidannotations.annotations.FragmentById;
 
-import static com.github.timnew.dartscoreboard.models.Game.GameWatcher;
-
 @EFragment(R.layout.simple_score)
-public class SimpleScoreFragment extends Fragment implements GameWatcher {
+public class SimpleScoreFragment extends Fragment {
 
     @FragmentById(R.id.score_grid)
     protected ScoreGridFragment scoreGrid;
@@ -25,15 +25,18 @@ public class SimpleScoreFragment extends Fragment implements GameWatcher {
     @FragmentById(R.id.keyboard)
     protected ScoreKeyboardFragment keyboard;
 
-    private Game game;
+    private GameHost getGameHost() {
+        return (GameHost) getActivity();
+    }
+
+    private Game getGame() {
+        return getGameHost().getGame();
+    }
 
     @AfterViews()
-    protected void initializeGame() {
-        game = Game.newSimpleGame(2, 501);
-
-        game.setGameWatcher(this);
-
-        scoreGrid.setPlayerInfos(game.getPlayers());
+    protected void initialize() {
+        scoreGrid.setPlayerInfos(getGame().getPlayers());
+        getGameHost().registerGameWatcher(new ActivityGameWatcher());
     }
 
     @AfterViews
@@ -41,26 +44,28 @@ public class SimpleScoreFragment extends Fragment implements GameWatcher {
         keyboard.setKeyboardResultHandler(new InputSegmentList.InputResultHandler() {
             @Override
             public void onCommit(int totalScore) {
-                game.submitScore(totalScore);
+                getGame().submitScore(totalScore);
                 scoreGrid.refreshView();
                 keyboard.clear();
             }
         });
     }
 
-    @Override
-    public void gameFinish(PlayerScoreInfo player) {
-        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Game Finish")
-                .setMessage(String.format("%s wins", player.getPlayerName()))
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        initializeGame();
-                    }
-                })
-                .create();
+    private class ActivityGameWatcher extends GameWatcherAdapter {
+        @Override
+        public void gameFinish(PlayerScoreInfo player) {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle("Game Finish")
+                    .setMessage(String.format("%s wins", player.getPlayerName()))
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            getGameHost().newGame();
+                        }
+                    })
+                    .create();
 
-        alertDialog.show();
+            alertDialog.show();
+        }
     }
 }

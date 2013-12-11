@@ -11,7 +11,7 @@ public class Game {
 
     private List<PlayerScoreInfo> players;
     private int currentPlayerIndex;
-    private GameWatcher gameWatcher;
+    private GameWatcher gameWatcher = new GameWatcherAdapter();
 
     public Game(List<PlayerScoreInfo> players) {
         this.players = players;
@@ -32,13 +32,19 @@ public class Game {
 
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 
-        return getCurrentPlayer().activate();
+        PlayerScoreInfo currentPlayer = getCurrentPlayer().activate();
+
+        gameWatcher.currentPlayerChanged(currentPlayer, currentPlayerIndex);
+
+        return currentPlayer;
     }
 
     public void submitScore(int totalScore) {
         PlayerScoreInfo currentPlayer = getCurrentPlayer();
 
         currentPlayer.submitScore(totalScore);
+
+        gameWatcher.scoreChanged(this);
 
         nextPlayer();
 
@@ -48,8 +54,8 @@ public class Game {
 
     private void gameFinish(PlayerScoreInfo player) {
         player.win();
-        if (gameWatcher != null)
-            gameWatcher.gameFinish(player);
+
+        gameWatcher.gameFinish(player);
     }
 
     public static Game newSimpleGame(int playerCount, int totalScore) {
@@ -65,10 +71,10 @@ public class Game {
     }
 
     public void setGameWatcher(GameWatcher gameWatcher) {
+        if (gameWatcher == null)
+            throw new IllegalArgumentException("gameWatcher is null");
+
         this.gameWatcher = gameWatcher;
     }
 
-    public static interface GameWatcher {
-        void gameFinish(PlayerScoreInfo player);
-    }
 }

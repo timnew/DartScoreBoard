@@ -3,11 +3,11 @@ package com.github.timnew.dartscoreboard.models;
 import com.github.timnew.dartscoreboard.scoregrid.PlayerScoreInfo;
 
 import org.fest.assertions.core.Condition;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.timnew.dartscoreboard.models.Game.GameWatcher;
 import static com.github.timnew.dartscoreboard.models.Game.newSimpleGame;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.conditions.android.IterableItemCountCondition.all;
@@ -106,6 +106,18 @@ public class GameTest {
         firstPlayer().setTotalScore(100);
         game.submitScore(100);
         verify(gameWatcher).gameFinish(firstPlayer());
+    }
+
+    @Ignore("Not Implemented Yet")
+    @Test
+    public void should_notify_when_score_changed() {
+
+    }
+
+    @Ignore("Not Implemented Yet")
+    @Test
+    public void should_notify_when_current_player_changed() {
+
     }
 }
 
