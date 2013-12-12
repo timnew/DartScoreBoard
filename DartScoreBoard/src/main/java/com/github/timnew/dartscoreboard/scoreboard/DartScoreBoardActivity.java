@@ -15,6 +15,7 @@ import com.github.timnew.dartscoreboard.models.CompositeGameWatcher;
 import com.github.timnew.dartscoreboard.models.Game;
 import com.github.timnew.dartscoreboard.models.GameHost;
 import com.github.timnew.dartscoreboard.models.GameWatcher;
+import com.github.timnew.dartscoreboard.remotescoreboard.RemoteScoreBoard;
 import com.github.timnew.dartscoreboard.remotescoreboard.RemoteScorePreference_;
 import com.github.timnew.dartscoreboard.settings.SettingsActivity;
 import com.googlecode.androidannotations.annotations.AfterViews;
@@ -33,6 +34,9 @@ public class DartScoreBoardActivity
 
     @Bean
     protected BluetoothDeviceManager deviceManager;
+
+    @Bean
+    protected RemoteScoreBoard remoteScoreBoard;
 
     @Pref
     protected RemoteScorePreference_ settings;
@@ -98,13 +102,19 @@ public class DartScoreBoardActivity
     }
 
     public void onConnectBluetoothItemClicked(MenuItem item) {
-        deviceManager.pickDevice(new BluetoothDeviceManager.BluetoothDevicePickResultHandler() {
-            @Override
-            public void onDevicePicked(BluetoothDevice device) {
-                String name = device.getName();
+        if (remoteScoreBoard.isConnected()) {
+            remoteScoreBoard.disconnect();
+            removeGameWatcher(remoteScoreBoard);
+        } else {
+            deviceManager.pickDevice(new BluetoothDeviceManager.BluetoothDevicePickResultHandler() {
+                @Override
+                public void onDevicePicked(BluetoothDevice device) {
+                    remoteScoreBoard.connect(device);
+                    registerGameWatcher(remoteScoreBoard);
+                }
+            });
+        }
 
-                settings.remoteScoreBoardName().put(name);
-            }
-        });
+
     }
 }
