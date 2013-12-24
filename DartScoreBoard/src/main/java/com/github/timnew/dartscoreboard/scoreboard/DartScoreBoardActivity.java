@@ -78,6 +78,7 @@ public class DartScoreBoardActivity
     @Override
     public void registerGameWatcher(GameWatcher watcher) {
         gameWatchers.add(watcher);
+        watcher.scoreChanged(game);
     }
 
     @Override
