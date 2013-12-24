@@ -14,7 +14,7 @@ class Bluetooth : public Stream{
   void beginSetup(sbyte retryTimes = 3);
 
   boolean setupEcho(sbyte retryTimes = -1); // AT
-  boolean setupBaund(int baund, sbyte retryTimes = -1); // AT+UART
+  boolean setupBaud(int baud, sbyte retryTimes = -1); // AT+UART
   boolean setupRole(byte role, sbyte retryTimes = -1); // AT+ROLE
   boolean setupName(String name, sbyte retryTimes = -1); // AT+NAME
   boolean setupSecret(String secretPin, sbyte retryTimes = -1); // AT+PSWD

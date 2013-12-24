@@ -66,7 +66,7 @@ String Bluetooth::endSetup() {
 }
 
 boolean Bluetooth::setupEcho(sbyte retryTimes) { return sendCommand("AT", retryTimes); }
-boolean Bluetooth::setupBaund(int baund, sbyte retryTimes) { return sendCommand("AT+UART=" + String(baund, (byte)DEC) + ",0,0", retryTimes); }
+boolean Bluetooth::setupBaud(int baud, sbyte retryTimes) { return sendCommand("AT+UART=" + String(baud, (byte)DEC) + ",0,0", retryTimes); }
 boolean Bluetooth::setupRole(byte role, sbyte retryTimes) { return sendCommand("AT+ROLE=" + String(role, (byte)DEC), retryTimes); }
 boolean Bluetooth::setupName(String name, sbyte retryTimes) { return sendCommand("AT+NAME=" + String(name), retryTimes); }
 boolean Bluetooth::setupSecret(String secretPin, sbyte retryTimes) { return sendCommand("AT+PSWD=" + String(secretPin), retryTimes); }

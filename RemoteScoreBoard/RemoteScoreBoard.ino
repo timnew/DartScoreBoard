@@ -26,7 +26,7 @@ void setup() {
   bluetooth.beginSetup(1);
  
   if(bluetooth.setupEcho()) { // Bluetooth board if found
-    bluetooth.setupBaund(9600);
+    bluetooth.setupBaud(9600);
     bluetooth.setupRole(0);
     bluetooth.setupName("TimNew-BlueTooth");
     bluetooth.setupSecret("0000");
