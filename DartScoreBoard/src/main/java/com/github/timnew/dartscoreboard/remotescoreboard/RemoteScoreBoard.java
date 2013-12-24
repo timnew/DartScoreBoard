@@ -32,8 +32,6 @@ public class RemoteScoreBoard implements GameWatcher {
 
     public boolean connect(BluetoothDevice device) {
         try {
-
-
             socket = device.createRfcommSocketToServiceRecord(UUID.fromString(SERIALPORT_UUID));
 
             socket.connect();
@@ -86,7 +84,7 @@ public class RemoteScoreBoard implements GameWatcher {
         };
 
         try {
-            writer.write(String.format("%d,%d;", scores[0], scores[1]));
+            writer.write(String.format("%4d%4d\n", scores[0], scores[1]));
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
